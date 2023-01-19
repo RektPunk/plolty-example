@@ -47,11 +47,11 @@ def vis_digraph(
         ),
     )
     for _, edges in _df.iterrows():
-        from_ = edges[from_]
-        to_ = edges[to_]
-        label_ = edges[edge_label_name]
-        _location_from_x, _location_from_y = _node_location[from_]
-        _location_to_x, _location_to_y = _node_location[to_]
+        _from_node = edges[from_]
+        _to_node = edges[to_]
+        _label = edges[edge_label_name]
+        _location_from_x, _location_from_y = _node_location[_from_node]
+        _location_to_x, _location_to_y = _node_location[_to_node]
         fig.add_annotation(
             dict(
                 x=_location_to_x,
@@ -73,7 +73,7 @@ def vis_digraph(
             dict(
                 x=(_location_from_x + _location_to_x) / 2,
                 y=(_location_from_y + _location_to_y) / 2,
-                text=label_,
+                text=_label,
                 showarrow=True,
                 arrowhead=1,
             )
