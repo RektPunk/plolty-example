@@ -46,15 +46,18 @@ def vis_digraph(
             yaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
         ),
     )
-    for edges in _nx_network_info.edges(data=True):
-        _location_from_x, _location_from_y = _node_location[edges[0]]
-        _location_to_x, _location_to_y = _node_location[edges[1]]
+    for _, edges in _df.iterrows():
+        from_ = edges[from_]
+        to_ = edges[to_]
+        label_ = edges[edge_label_name]
+        _location_from_x, _location_from_y = _node_location[from_]
+        _location_to_x, _location_to_y = _node_location[to_]
         fig.add_annotation(
             dict(
-                x=_location_from_x,
-                y=_location_from_y,
-                ax=_location_to_x,
-                ay=_location_to_y,
+                x=_location_to_x,
+                y=_location_to_y,
+                ax=_location_from_x,
+                ay=_location_from_y,
                 xref="x",
                 yref="y",
                 axref="x",
@@ -70,7 +73,7 @@ def vis_digraph(
             dict(
                 x=(_location_from_x + _location_to_x) / 2,
                 y=(_location_from_y + _location_to_y) / 2,
-                text=edges[2][edge_label_name],
+                text=label_,
                 showarrow=True,
                 arrowhead=1,
             )
