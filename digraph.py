@@ -22,4 +22,4 @@ if __name__ == "__main__":
         "edge_label",
     )
 
-    fig.write_html("plot/digraph.html")
+    fig.write_html("fig/digraph.html")
